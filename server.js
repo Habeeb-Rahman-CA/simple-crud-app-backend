@@ -1,18 +1,18 @@
-const express = require("express")
-const connectDb = require("./config/dbConnection")
-const Product = require("./models/productModel")
-const dotenv = require("dotenv").config()
+const express = require('express');
+const connectDb = require('./config/dbConnection');
+const Product = require('./models/productModel');
+const dotenv = require('dotenv').config();
+// Tesing git commit by roushid
+connectDb();
+const app = express();
 
-connectDb()
-const app = express()
+const port = process.env.PORT || 5000;
 
-const port = process.env.PORT || 5000
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use('/api/products', require('./routes/productRoutes'));
 
-app.use("/api/products", require("./routes/productRoutes"))
-
-app.listen(port, ()=>{
-    console.log(`Server is running on the ${port}`)
-})
+app.listen(port, () => {
+  console.log(`Server is running on the ${port}...`);
+});
